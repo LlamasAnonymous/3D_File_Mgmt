@@ -1,4 +1,4 @@
-$files = ls "$home\OneDrive\3Dobjects"
+$files = ls "$home\OneDrive\3Dobjects\MyCreations"
 
 foreach ($file in $files) {
     mkdir "$file\pla\gcode"
