@@ -1,6 +1,12 @@
 $ErrorActionPreference = 'SilentlyContinue'
 cls
 
+function filereplacement {
+	if ($) {
+
+	}
+}
+
 function filepath {
 
 	$filepath = Read-Host
@@ -166,6 +172,7 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 		while (1) {
 
 			cls
+			"Previous Printers: $printerextracted"
 			"Printer: $printernumber"
 			'What do you want to name this printer?'
 			'Whatever you enter in here, will be the name of the folder that you can store all of your sliced files'
@@ -206,6 +213,7 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 
 			cls
 
+			"Previous materials: $materialsextracted"
 			"Material: $materialnumber"
 			'What material will you be printing with?'
 			'Example: PLA, PLA+, ABS, TPU, CarbonPLA'
