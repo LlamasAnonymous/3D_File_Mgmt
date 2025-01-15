@@ -7,12 +7,16 @@ function filereplacement {
 	}
 }
 
+
+# Gets and edits the file path that is entered
 function filepath {
 
+	# First ask
 	$filepath = Read-Host
 
 	$filepath = $filepath.Replace('"', '')
 
+	# Error checking
 	While ((Test-Path $filepath) -eq $false) {
 
 		cls
@@ -20,30 +24,35 @@ function filepath {
 		Start-Sleep 1
 		"Could not find a file path for: $filepath"
 		Start-Sleep 1
+		# This variable changes depending what the original question was
 		$example
 		$filepath = Read-Host
 
 		$filepath = $filepath.Replace('"', '')
 	}
 
+	# Allows you to use the $filepath variable outside of the function
 	$Global:filepath = $filepath
 
 	cls
 }
 
 
+# Creates the folders (Gets info from config files and inputs)
 function directory {
 
 	mkdir "$basefolder\$filename"
 
+	# Gets all of the printers described in the printers config file, and creates a folder for each one
 	foreach ($printer in $printerextracted) {
 
 		mkdir "$basefolder\$filename\$printer"
 	}
 
+	# Nests each material name in the materials config file inside of each printer folder
 	foreach ($materialname in $materialsextracted) {
 
-		mkdir "$basefolder\$filename\$materialname"
+		mkdir "$basefolder\$filename\$printer\$materialname"
 	}
 
 	$cat = "blend\Printable", "pics", "stl", "notes"
@@ -54,21 +63,23 @@ function directory {
 	}
 	
 	New-Item "$basefolder\$filename\notes\Notes.txt"
-	Start-Process $modelinglocation
+	# Opens the modeling software if that option was enabled
+	Start-Process $modelinglocationstring
 }
 
 
+# Pulls all of the files based on their extension, and organizes them into the newely created folders
 function organization {
 
 	Get-ChildItem "$basefolder\$filename\$selectedname" -Recurse  | Where-Object { $_.Extension -eq ".stl" } | foreach-object { Move-Item $_ "$basefolder\$filename\stl" }
 	Get-ChildItem "$basefolder\$filename\$selectedname" -Recurse | Where-Object { $_.Extension -eq ".jpg", ".jpeg", ".png" } | foreach-object { Move-Item $_ "$basefolder\$filename\pics" }
-	Get-ChildItem "$basefolder\$filename\$selectedname" -Filter "*.3mf", "*.gcode" -Recurse | Where-Object { $_.Extension -eq ".3mf", ".gcode" } | foreach-object { Move-Item $_ "$basefolder\$filename" }
-	Get-ChildItem "$basefolder\$filename\$selectedname" -Filter "*.txt", "*.pdf" -Recurse | foreach-object { Move-Item $_ "$basefolder\$filename\notes" }
+	Get-ChildItem "$basefolder\$filename\$selectedname" -Recurse | Where-Object { $_.Extension -eq ".3mf", ".gcode" } | foreach-object { Move-Item $_ "$basefolder\$filename" }
+	Get-ChildItem "$basefolder\$filename\$selectedname" -Recurse | Where-Object { $_.Extension -eq ".txt", ".pdf" } | foreach-object { Move-Item $_ "$basefolder\$filename\notes" }
 	start $basefolder\$filename
 
 	"Moved the file: $zippeddir"
 	"To: $basefolder\$filename"
-	''
+	Read-Host "Hit enter:"
 }
 
 
@@ -84,13 +95,15 @@ $materialsextracted = Get-Content $materialconf
 $fromscratchextracted = Get-Content $scratchconf
 $somewhereextracted = Get-Content $somewhereconf
 $modelinglocation = Get-Content $modelingsoftware
+$blenderanswerex = $modelinglocation[1]
 
+$testpathextracted = $fromscratchextracted, $somewhereextracted, $printerconf, $materialconf
 
 $a = 0
 
 while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 
-	if ((Test-Path $fromscratchextracted) -and (Test-Path $somewhereextracted) -and (Test-Path $printerconf) -and (Test-Path $materialconf)) {
+	if ((Test-Path $testpathextracted) -and $locationcheck -ne "check_failed") {
 
 		'Do you want to reset any configuration settings? (y,n)'
 		$conf = Read-Host
@@ -122,11 +135,11 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 
 					'Please choose one of the options.'
 					''
-					'[0]: Printer names'
-					'[1]: Materials'
-					'[2]: File locations'
-					'[3]: Modeling software auto-open preference'
-					'[4]: All'
+					'	[0]: Printer names'
+					'	[1]: Materials'
+					'	[2]: File locations'
+					'	[3]: Modeling software auto-open preference'
+					'	[4]: All'
 					''
 					$confanswer = Read-Host "You want to change option"
 
@@ -147,7 +160,7 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 				}
 				else {
 
-					"You want to change the " + $confarray[$confanswer] + " Configurations? (y,n)"
+					"You want to change the " + $confarray[$confanswer] + " configurations? (y,n)"
 					$selection = Read-Host
 
 					if ($selection -eq "y") {
@@ -156,6 +169,10 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 					}
 					
 				}
+			}
+			else {
+
+				Break
 			}
 		}
 	}
@@ -167,22 +184,27 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 
 	if ($confanswer -eq "0" -or $confanswer -eq "4") {
 
+		rd $printerconf -Force
+
 		$printernumber = 1
 	
 		while (1) {
 
 			cls
+			$printerextracted = Get-Content $printerconf
 			"Previous Printers: $printerextracted"
-			"Printer: $printernumber"
-			'What do you want to name this printer?'
-			'Whatever you enter in here, will be the name of the folder that you can store all of your sliced files'
-			'Example: Ender3S1Pro, Bambu_Labs_X1C, BLp1s'
-			''
-			'Just leave the space blank, and hit enter when you are finished'
+			"Printer: $printernumber
+			"
+			'What do you want to name this printer?
+			'
+			'Whatever you enter in here, will be the name of the folder that you can store all of your sliced files
+			'
+			'Example: Ender3S1Pro, Bambu_Labs_X1C, BLp1s
+			'
+			'Just leave the space blank, and hit enter when you are finished
+			'
 			$printername = Read-Host
 			$printername = $printername.Replace(' ', '_')
-			
-			$printernumber = $printernumber + 1
 
 			if ($printername -eq "") {
 
@@ -198,6 +220,8 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 
 					$printername | Out-File $printerconf -Append	
 				}
+
+				$printernumber = $printernumber + 1
 			}
 
 		}
@@ -207,20 +231,38 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 
 	if ($confanswer -eq "1" -or $confanswer -eq "4") {
 
+		rd $materialconf -Force
+
 		$materialnumber = 1
 
 		while (1) {
 
 			cls
-
+			$materialsextracted = Get-Content $materialconf
 			"Previous materials: $materialsextracted"
-			"Material: $materialnumber"
-			'What material will you be printing with?'
-			'Example: PLA, PLA+, ABS, TPU, CarbonPLA'
-			'Just leave the space blank, and hit enter when you are finished'
+			"Material: $materialnumber
+			"
+			'What material will you be printing with?
+			'
+			'If you enter "basic", it will set the config to the default setup.
+			i.e. PLA, PLA+, ABS, TPU, PETG
+			'
+			# Do I want to keep this tho?
+			'You can type "+" before the material name to add it to the file with.
+			Examples: +PLA, +PLA+, +ABS
+			'
+			'Just leave the space blank and hit enter when you are finished.
+			'
 			$material = Read-Host
 			$material = $material.Replace(' ', '_')
-			$materialnumber = $materialnumber + 1
+
+			if ($material -eq "basic") {
+
+				'The default setup has been set.'
+				$material = "PLA", "PLA+", "ABS", "TPU", "PETG"
+				$material | Out-File $materialconf
+				'Do you want to add any more?'
+			}
 
 			if ($material -eq "") {
 
@@ -236,6 +278,8 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 
 					$material | Out-File $materialconf -Append
 				}
+
+				$materialnumber = $materialnumber + 1
 			}
 		}
 	}
@@ -265,7 +309,7 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 	}
 
 
-	if ($confanswer -eq "3" -or $confanswer -eq "4") {
+	if ($confanswer -eq "3" -or $confanswer -eq "4" -or (Test-Path $modelingsoftware) -eq $false) {
 
 		'Would you like to open a 3D modeling software automatically when creating a new file? (y,n)'
 		'Example: (Bender, fusion360)'
@@ -279,7 +323,8 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 			$example = '	Where is the 3D modeling software located? Copy the full link, not just the folder that it is nested in.'
 			filepath
 
-			$Global:filepath | Out-File $modelingsoftware
+			$Global:filepath | Out-File $modelingsoftware -Force
+			$blenderanswer | Out-File $modelingsoftware -Append
 		}
 	}
 
@@ -288,18 +333,21 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 	$fromscratchextracted = Get-Content $scratchconf
 	$somewhereextracted = Get-Content $somewhereconf
 	$modelinglocation = Get-Content $modelingsoftware
+	$blenderanswerex = $modelinglocation[1]
 
-	"Do these locations look right? (y,n)
+	$modelinglocationstring = $modelinglocation[0]
 
-	Printer name: $printerextracted
+	"Do these configurations look right? (y,n)
 
-	Materials: $materialsextracted
+	Printer name(s): $printerextracted
+
+	Material(s): $materialsextracted
 		
-	If you created the model: $fromscratchextracted
+	Location if you created the model: $fromscratchextracted
 		
 	If someone else created the model: $somewhereextracted
 		
-	3D modeling application location: $modelinglocation
+	3D modeling application location: $modelinglocationstring
 	"
 
 	$restart = Read-Host
@@ -323,6 +371,8 @@ $materialsextracted = Get-Content $materialconf
 $fromscratchextracted = Get-Content $scratchconf
 $somewhereextracted = Get-Content $somewhereconf
 $modelinglocation = Get-Content $modelingsoftware
+
+$modelinglocationstring = $modelinglocation[0]
 
 
 Write-Host "What do you want to name your new 3D object file?"
@@ -409,6 +459,7 @@ if ($contraband -eq "n") {
 elseif ($contraband -eq "y") {
 
 	while (Test-Path "$fromscratchextracted\$filename") {
+
 		"This file name already exists. Pick a new one."
 		$filename = Read-Host	
 	}
