@@ -247,10 +247,6 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 			'If you enter "basic", it will set the config to the default setup.
 			i.e. PLA, PLA+, ABS, TPU, PETG
 			'
-			# Do I want to keep this tho?
-			'You can type "+" before the material name to add it to the file with.
-			Examples: +PLA, +PLA+, +ABS
-			'
 			'Just leave the space blank and hit enter when you are finished.
 			'
 			$material = Read-Host
@@ -258,10 +254,20 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 
 			if ($material -eq "basic") {
 
-				'The default setup has been set.'
 				$material = "PLA", "PLA+", "ABS", "TPU", "PETG"
-				$material | Out-File $materialconf
-				'Do you want to add any more?'
+				while (1) {
+					$material | Out-File $materialconf
+
+					'The default setup has been set.
+				i.e. PLA, PLA+, ABS, TPU, PETG
+				'
+					'Would you like to add anymore? If not just leave it blank and hit enter.
+				' # Stopped here-----------------------------------------------------------------------------------------------
+					$material = Read-Host
+				}
+				elseif ($answer) {
+					Break
+				}
 			}
 
 			if ($material -eq "") {
