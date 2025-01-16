@@ -244,28 +244,30 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 			"
 			'What material will you be printing with?
 			'
-			'If you enter "basic", it will set the config to the default setup.
-			i.e. PLA, PLA+, ABS, TPU, PETG
+			'If you enter "basic", it will set the config to the default setup.'
+			'i.e. PLA, PLA+, ABS, TPU, PETG
 			'
 			'Just leave the space blank and hit enter when you are finished.
 			'
 			$material = Read-Host
 			$material = $material.Replace(' ', '_')
 
-			if ($material -eq "basic") {
+			cls
 
+			if ($material -eq "basic") {
+					'The default setup has been set.
+					'
+					'i.e. PLA, PLA+, ABS, TPU, PETG'
 				$material = "PLA", "PLA+", "ABS", "TPU", "PETG"
 				while (1) {
-					$material | Out-File $materialconf
 
-					'The default setup has been set.
-				i.e. PLA, PLA+, ABS, TPU, PETG
-				'
+					"Materials selected: $materialsextracted"
 					'Would you like to add anymore? If not just leave it blank and hit enter.
-				' # Stopped here-----------------------------------------------------------------------------------------------
+					'
 					$material = Read-Host
+					$material | Out-File $materialconf
 				}
-				elseif ($answer) {
+				elseif ($answer -eq "") {
 					Break
 				}
 			}
@@ -343,6 +345,10 @@ while ($locationcheck -eq "check_failed" -or $a -lt 1) {
 
 	$modelinglocationstring = $modelinglocation[0]
 
+	if ($blenderanswerex -ne "y") {
+		$modelinglocationstring = "N/A"
+	}
+
 	"Do these configurations look right? (y,n)
 
 	Printer name(s): $printerextracted
@@ -383,6 +389,7 @@ $modelinglocationstring = $modelinglocation[0]
 
 Write-Host "What do you want to name your new 3D object file?"
 $filename = Read-Host
+$filename = $filename.Replace(" ", "_")
 
 cls
 
