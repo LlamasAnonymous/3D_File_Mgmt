@@ -1,1 +1,0 @@
-. "3DFilesManagement/New3dFileScript.ps1"
