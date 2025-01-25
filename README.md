@@ -8,4 +8,6 @@
 
     -- Good to know --
 
+- All of this runs with Winforms using Powershell
+
 - The "New file" button does not currently work
