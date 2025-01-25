@@ -1,7 +1,11 @@
 # 3D_File_Mgmt
 
-> Settings form is working very well at this point. I've done all of the testing I could think of.
+    -- Coming soon --
 
-> The New file form is not working yet. Have that button directing you to the Main.ps1 file, but that one does not work currently
+- 3D file editor button on main form
 
-> I will add a 3D file editor button
+- Hit enter to add or remove items from the lists
+
+    -- Good to know --
+
+- The "New file" button does not currently work
