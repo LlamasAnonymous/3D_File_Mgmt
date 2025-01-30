@@ -1,5 +1,3 @@
-# 3D_File_Mgmt
-
 # Good to know
 
 - After downloading just double-click on the "Start_3D_FM.exe" file to open the application
