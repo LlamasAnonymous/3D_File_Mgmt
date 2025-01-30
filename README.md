@@ -14,6 +14,8 @@
 
 - Version number visable on one of the screens (Probably the Settings window)
 
+- After bringing your downloaded folder to the new folder it will automatically sort most of the files for you
+
 # Current know issues
 
 - Add "_" to the name of the new file
