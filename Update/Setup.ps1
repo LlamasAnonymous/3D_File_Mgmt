@@ -36,4 +36,4 @@ rd -r "c:\3D_File_Mgmt" -Force
 git clone "https://github.com/LlamasAnonymous/3D_File_Mgmt.git" "C:\3D_File_Mgmt"
 Start-Process "C:\3D_File_Mgmt\Start_3D_FM.exe"
 
-Copy-Item "C:\3D_File_Mgmt\Misc\3D File Management.lnk" "C:\Users\gjbro\AppData\Roaming\Microsoft\Windows\Start Menu\Programs"
+Copy-Item "C:\3D_File_Mgmt\Misc\3D File Management.lnk" "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs" -Force
