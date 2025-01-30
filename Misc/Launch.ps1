@@ -1,1 +1,1 @@
-Start-Process pwsh -WindowStyle Hidden "C:\3D_File_Mgmt\3D_File_Mgmt.ps1"
+Start-Process pwsh "C:\3D_File_Mgmt\3D_File_Mgmt.ps1"

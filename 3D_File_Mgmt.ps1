@@ -1,7 +1,7 @@
 # >> Setup <<
 
-# $ErrorActionPreference = 'SilentlyContinue'
-$ErrorActionPreference = 'Continue'
+$ErrorActionPreference = 'SilentlyContinue'
+# $ErrorActionPreference = 'Continue'
 # $ErrorActionPreference = 'Stop'
 cd $PSScriptRoot
 
