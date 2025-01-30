@@ -15,3 +15,5 @@
 - Version number visable on one of the screens (Probably the Settings window)
 
 # Current know issues
+
+- Add "_" to the name of the new file
