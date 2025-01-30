@@ -2,14 +2,14 @@
 $Browse_Folder = New-Object System.Windows.Forms.FolderBrowserDialog -Property @{
     
     InitialDirectory = $home
-    Description      = "Select a folder"
+    Description = "Select a folder"
 }
 
 
 $File_Browse = New-Object System.Windows.Forms.OpenFileDialog -Property @{
 
     InitialDirectory = "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs"
-    Title            = "Select your 3D modeling software"    
+    Title = "Select your 3D modeling software"    
 }
 
 
@@ -34,14 +34,14 @@ function SW_BrowseClick {
 
 function Model_Check {
 
-    if ($Model_Check.CheckState -eq $true) {
+    if ($Model_Check.Checked) {
 
         if ($Model_TextBox.Enabled -eq $false) {
 
             $Model_TextBox.Enabled = $true
         }
     }
-    elseif ($Model_Check.CheckState -eq $false) {
+    elseif ($Model_Check.Checked -eq $false) {
         
         $Model_TextBox.Enabled = $false
     }
@@ -117,15 +117,15 @@ function Save {
     
     $Check = @()
 
-    if ((Test-Path ".\Configs") -eq $false) {
+    if ((Test-Path "$home\3D_Mgmt\Configs") -eq $false) {
 
-        mkdir  ".\Configs" | Out-Null
+        mkdir  "$home\3D_Mgmt\Configs" | Out-Null
     }
 
     $MC_TextBox.Text = $MC_TextBox.Text.Replace('"', '')
     if (Test-Path $MC_TextBox.Text) {
 
-        $MC_TextBox.Text | Out-File ".\Configs\ScratchConfig.txt"
+        $MC_TextBox.Text | Out-File "$home\3D_Mgmt\Configs\ScratchConfig.ini"
         $check += 1
     }
     else {
@@ -138,7 +138,7 @@ function Save {
     $SW_TextBox.Text = $SW_TextBox.Text.Replace('"', '')
     if (Test-Path $SW_TextBox.Text) {
 
-        $SW_TextBox.Text | Out-File ".\Configs\SomewhereConfig.txt"
+        $SW_TextBox.Text | Out-File "$home\3D_Mgmt\Configs\SomewhereConfig.ini"
         $check += 1
     }
     else {
@@ -151,13 +151,13 @@ function Save {
     $Model_TextBox.Text = $Model_TextBox.Text.Replace('"', '')
     if ((Test-Path $Model_TextBox.Text) -and $Model_Check.Checked -eq $true) {
 
-        $Model_TextBox.Text | Out-File ".\Configs\ModelingSoftwareLocation.txt"
-        "y" | Out-File ".\Configs\ModelingSoftwareLocation.txt" -Append
+        $Model_TextBox.Text | Out-File "$home\3D_Mgmt\Configs\ModelingSoftwareLocation.ini"
+        "y" | Out-File "$home\3D_Mgmt\Configs\ModelingSoftwareLocation.ini" -Append
         $Check += 1
     }
     elseif ($Model_Check.Checked -eq $false) {
-        $Model_TextBox.Text | Out-File ".\Configs\ModelingSoftwareLocation.txt"
-        "n" | Out-File ".\Configs\ModelingSoftwareLocation.txt" -Append
+        $Model_TextBox.Text | Out-File "$home\3D_Mgmt\Configs\ModelingSoftwareLocation.ini"
+        "n" | Out-File "$home\3D_Mgmt\Configs\ModelingSoftwareLocation.ini" -Append
         $Check += 1
     }
     else {
@@ -165,15 +165,30 @@ function Save {
         $Check += 0
     }
 
+
+    if (Test-Path "$home\3D_Mgmt\Configs\zipconf.ini") {
+
+        Remove-Item "$home\3D_Mgmt\Configs\zipconf.ini"
+    }
+
+    if ($ZIP_Check.Checked) {
+
+        "y" | Out-File "$home\3D_Mgmt\Configs\zipconf.ini"
+    }
+    else {
+        
+        "n" | Out-File "$home\3D_Mgmt\Configs\zipconf.ini"
+    }
+
     
     if ($Printer_List.Items -gt 0) {
 
-        Remove-Item ".\Configs\Printers.txt" -Force | Out-Null
-        New-Item ".\Configs\Printers.txt" | Out-Null
+        Remove-Item "$home\3D_Mgmt\Configs\Printers.ini" -Force | Out-Null
+        New-Item "$home\3D_Mgmt\Configs\Printers.ini" | Out-Null
 
         foreach ($Printer in $Printer_List.Items) {
 
-            $Printer | Out-File ".\Configs\Printers.txt" -Append
+            $Printer | Out-File "$home\3D_Mgmt\Configs\Printers.ini" -Append
         }
 
         $check += 1
@@ -187,12 +202,12 @@ function Save {
 
     if ($Mat_List.Items -gt 0) {
 
-        Remove-Item ".\Configs\Materials.txt" -Force | Out-Null
-        New-Item ".\Configs\Materials.txt" | Out-Null
+        Remove-Item "$home\3D_Mgmt\Configs\Materials.ini" -Force | Out-Null
+        New-Item "$home\3D_Mgmt\Configs\Materials.ini" | Out-Null
 
         foreach ($Printer in $Mat_List.Items) {
 
-            $Printer | Out-File ".\Configs\Materials.txt" -Append
+            $Printer | Out-File "$home\3D_Mgmt\Configs\Materials.ini" -Append
         }
 
         $check += 1

@@ -2,6 +2,7 @@ $MaterialsE = Get-Content $MaterialsL
 $ModelingSoftwareE = Get-Content $ModelingSoftwareL
 $MCE = Get-Content $MCL
 $SWE = Get-Content $SWL
+$zipE = Get-Content $zipL
 
 $PrintersE = Get-Content $PrintersL -ErrorAction SilentlyContinue
 
@@ -15,7 +16,6 @@ $Settings_Form = New-Object System.Windows.Forms.Form -Property @{
     AutoSize = $true
     StartPosition = 'CenterScreen'
 }
-
 
 
 $MC_Label = New-Object System.Windows.Forms.Label -Property @{
@@ -90,13 +90,11 @@ $Settings_Form.Controls.Add($SW_Button)
 
 $Model_Check = New-Object System.Windows.Forms.CheckBox -Property @{
 
-    # Check to see if there is a y or an n. If the file is empty, Uncheck the box -------------------------------------------------------------------------
     Location = New-Object System.Drawing.Point(10, [Math]::Round($SW_Button.Height + $SW_Button.Top + 20))
     AutoSize = $true
-    Text = "Do you want to auto-open some 3D modeling sofware when creating a new file?"
+    Text = "Do you want to auto-open any 3D modeling sofware when creating a new file?"
     Font = New-Object System.Drawing.Font("*",13)
     Add_CheckedChanged = ({ Model_Check })
-    
 }
 if ($ModelingSoftwareE[1] -eq "y") {
 
@@ -124,7 +122,6 @@ $Settings_Form.Controls.Add($Model_Label)
 
 $Model_TextBox = New-Object System.Windows.Forms.TextBox -Property @{
 
-    # How is this getting the previous path when there are no files to go off of -----------------------------------------------------------------------
     Location = New-Object System.Drawing.Point(10, [Math]::Round($Model_Label.Height + $Model_Label.Top + 20))
     Width = 500
     Font = New-Object System.Drawing.Font("*",15)
@@ -161,12 +158,28 @@ $Model_Button = New-Object System.Windows.Forms.Button -Property @{
 $Settings_Form.Controls.Add($Model_Button)
 
 
+$ZIP_Check = New-Object System.Windows.Forms.CheckBox -Property @{
+
+    Location = New-Object System.Drawing.Point(10, [Math]::Round($Model_Button.Height + $Model_Button.Top + 20))
+    AutoSize = $true
+    Text = "Do you want to search through your files for a zipped folder after downloading it?"
+    Font = New-Object System.Drawing.Font("*",13)
+}
+if ($zipE -eq "y") {
+
+    $ZIP_Check.Checked = $true
+}
+else {
+
+    $ZIP_Check.Checked = $false
+}
+$Settings_Form.Controls.Add($ZIP_Check)
+
 
 $Printer_TextBox = New-Object System.Windows.Forms.TextBox -Property @{
 
-    # Make it to where you can hit enter in the text box, or when you hit add, it'll take you back to the textbox ----------------------------------------------------------------
-    Location = New-Object System.Drawing.Point(10, [Math]::Round($Model_TextBox.Height + $Model_TextBox.Top + 60))
-    Width = [Math]::Round($Model_TextBox.Width / 2)
+    Location = New-Object System.Drawing.Point(10, [Math]::Round($ZIP_Check.Height + $ZIP_Check.Top + 60))
+    Width = [Math]::Round($Model_TextBox.Width * 0.5)
     Font = New-Object System.Drawing.Font("*",15)
     TextAlign = "Center"
 }
@@ -201,7 +214,6 @@ $Settings_Form.Controls.Add($Printer_Add)
 
 $Printer_Remove = New-Object System.Windows.Forms.Button -Property @{
     
-    # Whatever they select gets added to the textbox. Whatever is in the textbox can be removed when clicking the remove button ----------------------------------------------------------------------------
     Location = New-Object System.Drawing.Point([Math]::Round($Printer_Add.Left), [Math]::Round($Printer_Add.Height + $Printer_Add.Top))
     AutoSize = $true
     Width = [Math]::Round($Printer_Add.Width)
