@@ -1,6 +1,6 @@
 . ".\Settings_Design.ps1"
 
-$NameText = $Name.Text
+$NameText = $Name.Text.Replace(" ", "_")
 
 if (Test-Path "$MCE\$NameText") {
 

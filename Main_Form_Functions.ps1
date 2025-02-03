@@ -8,8 +8,6 @@ function NewFile_Click {
 
     if ($Name.Text -ne "") {
 
-        $Name.Text.Replace(" ", "_")
-
         . ".\New_File_Form_Design.ps1"
         $NF_Form.ShowDialog()
     }

@@ -1,1 +1,0 @@
-Start-Process pwsh "C:\3D_File_Mgmt\3D_File_Mgmt.ps1"
