@@ -35,6 +35,9 @@ if ($a -eq 15) {
 }
 
 rd -r "c:\3D_File_Mgmt" -Force
+
+Start-Sleep 1
+
 git clone https://github.com/LlamasAnonymous/3D_File_Mgmt.git C:\3D_File_Mgmt
 Start-Process "C:\3D_File_Mgmt\Start_3D_FM.exe"
 
