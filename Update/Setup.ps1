@@ -34,7 +34,7 @@ if ($a -eq 15) {
     exit
 }
 
-rd -r "c:\3D_File_Mgmt" -Force
+rd -r "c:\3D_File_Mgmt\*" -Force
 
 git clone https://github.com/LlamasAnonymous/3D_File_Mgmt.git C:\3D_File_Mgmt
 Start-Process "C:\3D_File_Mgmt\Start_3D_FM.exe"
