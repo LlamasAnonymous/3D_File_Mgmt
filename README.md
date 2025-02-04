@@ -1,12 +1,18 @@
+# New
+
+- Auto-update
+
 # Good to know
 
-- After downloading just double-click on the "Start_3D_FM.exe" file to open the application
+- After downloading, the "3D File Mgmt" shortcut can be found and pinned from the start menu
 
 - All of this runs with WinForms using Powershell
 
 - The application will auto-update
 
 - After unzipping a file that you downloaded, you can find the files that were unzipped in the "Unzipped" folder
+
+- Spaces are automatically replaced with the "_" symbol
 
 # Coming soon
 
@@ -22,4 +28,3 @@
 
 # Current know issues
 
-- Add "_" to the name of the new file
