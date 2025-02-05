@@ -183,6 +183,7 @@ $Printer_TextBox = New-Object System.Windows.Forms.TextBox -Property @{
     Width = [Math]::Round($Model_TextBox.Width * 0.5)
     Font = New-Object System.Drawing.Font("*",15)
     TextAlign = "Center"
+    Add_KeyPress = ({ Enter_Printer })
 }
 $Settings_Form.Controls.Add($Printer_TextBox)
 
@@ -231,6 +232,8 @@ $Printer_List = New-Object System.Windows.Forms.ListBox -Property @{
     Location = New-Object System.Drawing.Point([Math]::Round(($Printer_TextBox.Width / 2) + $Printer_Add.Left), [Math]::Round($Printer_Add.Top))
     AutoSize = $true
     Width = [Math]::Round($Printer_TextBox.Width / 2)
+    Add_SelectedIndexChanged = ({ Printer_List_Select })
+    Add_KeyPress = ({ Remove_Printer })
 }
 foreach ($Printer in $PrintersE) { # Fetches the items that are in the printer config file
 
@@ -257,6 +260,7 @@ $Mat_TextBox = New-Object System.Windows.Forms.TextBox -Property @{
     Width = [Math]::Round($Printer_TextBox.Width)
     Font = New-Object System.Drawing.Font("*",15)
     TextAlign = "Center"
+    Add_KeyPress = ({ Enter_Mat })
 }
 $Settings_Form.Controls.Add($Mat_TextBox)
 
@@ -306,6 +310,8 @@ $Mat_List = New-Object System.Windows.Forms.ListBox -Property @{
     Location = New-Object System.Drawing.Point([Math]::Round(($Mat_TextBox.Width / 2) + $Mat_Add.Left), [Math]::Round($Mat_Add.Top))
     AutoSize = $true
     Width = [Math]::Round($Mat_TextBox.Width / 2)
+    Add_SelectedIndexChanged = ({ Mat_List_Select })
+    Add_KeyPress = ({ Remove_Mat })
 }
 foreach ($Material in $MaterialsE) { # Fetches the items that are in the material config file
 $Mat_List.Items.Add($Material)

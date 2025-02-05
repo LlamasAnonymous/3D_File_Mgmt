@@ -24,7 +24,7 @@ $TP = @(
     $zipL
 )
 
-if ((Test-Path $TP) -eq $false) {
+if ((Test-Path $TP) -contains $false) {
     if ((Test-Path "$home\3D_Mgmt\Configs") -eq $false) {
         mkdir "$home\3D_Mgmt\Configs" | Out-Null
     }

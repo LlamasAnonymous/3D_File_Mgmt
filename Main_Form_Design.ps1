@@ -18,6 +18,7 @@ $NameL = New-Object System.Windows.Forms.Label -Property @{
     TextAlign = "MiddleCenter"
     Font = New-Object System.Drawing.Font("*", 15)
 }
+$MainForm.Controls.Add($NameL)
 
 
 $Name = New-Object System.Windows.Forms.TextBox -Property @{
@@ -26,6 +27,7 @@ $Name = New-Object System.Windows.Forms.TextBox -Property @{
     Width = 383
     Font = New-Object System.Drawing.Font("*", 20)
 }
+$MainForm.Controls.Add($Name)
 
 
 $SetupConfigButton = New-Object System.Windows.Forms.Button -Property @{
@@ -38,7 +40,7 @@ $SetupConfigButton = New-Object System.Windows.Forms.Button -Property @{
     Font = New-Object System.Drawing.Font("*", 20)
     Add_Click = ({ Settings_Click })
 }
-
+$MainForm.Controls.Add($SetupConfigButton)
 
 $NewFileButton = New-Object System.Windows.Forms.Button -Property @{
 
@@ -50,14 +52,4 @@ $NewFileButton = New-Object System.Windows.Forms.Button -Property @{
     Font = New-Object System.Drawing.Font("*", 20)
     Add_Click = ({ NewFile_Click })
 }
-
-# >> Form and properties <<
-
-# >> Add items to form <<
-
-$MainForm.Controls.Add($NameL)
-$MainForm.Controls.Add($Name)
-$MainForm.Controls.Add($SetupConfigButton)
 $MainForm.Controls.Add($NewFileButton)
-
-# >> Add items to form <<

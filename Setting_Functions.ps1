@@ -57,6 +57,24 @@ function Model_BrowseClick {
 }
 
 
+function Enter_Printer {
+    
+    if ($_.KeyChar -eq [char]13) {
+
+        $Printer_Add.PerformClick()
+    }
+}
+
+
+function Remove_Printer {
+    
+    if ($_.KeyChar -eq [char]13) {
+
+        $Printer_Remove.PerformClick()
+    }
+}
+
+
 function Printer_Add {
     
     if ($Printer_TextBox.Text -eq "" -or $Printer_TextBox.Text -in $Printer_List.Items) {
@@ -78,9 +96,37 @@ function Printer_Remove {
     if ($Printer_List.SelectedIndex -ne -1) {
 
         $Printer_List.Items.RemoveAt($Printer_List.SelectedIndex)
+        $Printer_TextBox.Text = ""
     }
     else {
         [System.Windows.Forms.MessageBox]::Show('Please select an item to remove.', 'No Item Selected')
+    }
+}
+
+
+function Printer_List_Select {
+    
+    if ($Printer_List.SelectedIndex -ne -1) {
+
+        $Printer_List_String = $Printer_List.SelectedItem | Out-String
+        $Printer_TextBox.Text = $Printer_List_String
+    }
+}
+
+
+function Enter_Mat {
+    
+    if ($_.KeyChar -eq [char]13) {
+
+        $Mat_Add.PerformClick()
+    }
+}
+
+function Remove_Mat {
+    
+    if ($_.KeyChar -eq [char]13) {
+
+        $Mat_Remove.PerformClick()
     }
 }
 
@@ -106,9 +152,20 @@ function Mat_Remove {
     if ($Mat_List.SelectedIndex -ne -1) {
 
         $Mat_List.Items.RemoveAt($Mat_List.SelectedIndex)
+        $Mat_TextBox.Text = ""
     }
     else {
         [System.Windows.Forms.MessageBox]::Show('Please select an item to remove.', 'No Item Selected')
+    }
+}
+
+
+function Mat_List_Select {
+    
+    if ($Mat_List.SelectedIndex -ne -1) {
+
+        $Mat_List_String = $Mat_List.SelectedItem | Out-String
+        $Mat_TextBox.Text = $Mat_List_String
     }
 }
 
@@ -165,11 +222,6 @@ function Save {
         $Check += 0
     }
 
-
-    if (Test-Path "$home\3D_Mgmt\Configs\zipconf.ini") {
-
-        Remove-Item "$home\3D_Mgmt\Configs\zipconf.ini"
-    }
 
     if ($ZIP_Check.Checked) {
 

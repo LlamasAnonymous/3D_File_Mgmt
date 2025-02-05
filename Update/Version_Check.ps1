@@ -13,7 +13,6 @@ if ($LASTEXITCODE -eq 0) {
 
     if ($VersionTotal -ne 0) {
 
-        $Remote_Version | Out-File ".\Update\Version.ini"
         rd -r C:\Versions -Force
         Start-Process "C:\3D_File_Mgmt\Update\Prep.bat"
     }
