@@ -2,6 +2,8 @@
 
 - Auto-update
 
+- Hit enter to Add/Remove items that use the list box
+
 # Good to know
 
 - For everything to work properly, you will need to clone the repo directly to your C drive
