@@ -170,6 +170,12 @@ function Mat_List_Select {
 }
 
 
+function Help_Click {
+
+    Start-Process ".\Misc\Help\3D_File_Mgmt_Guide.pdf"
+}
+
+
 function Save {
     
     $Check = @()

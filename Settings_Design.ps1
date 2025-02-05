@@ -355,4 +355,15 @@ $Version_Label = New-Object System.Windows.Forms.Label -Property @{
 }
 $Settings_Form.Controls.Add($Version_Label)
 
+
+$Help_Button = New-Object System.Windows.Forms.Button -Property @{
+
+    Location = New-Object System.Drawing.Point([Math]::Round($Save_Button.Width + $Save_Button.Left - 40), [Math]::Round($Save_Button.Top - 30))
+    AutoSize = $true
+    Width = 15
+    Text = "Help"
+    Add_Click = ({ Help_Click })
+}
+$Settings_Form.Controls.Add($Help_Button)
+
 # >> Form and properties <<
