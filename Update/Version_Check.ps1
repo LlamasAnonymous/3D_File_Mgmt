@@ -13,8 +13,7 @@ if ($LASTEXITCODE -eq 0) {
 
     if ($VersionTotal -ne 0) {
 
-        rd -r C:\Versions -Force
-        Start-Process "C:\3D_File_Mgmt\Update\Prep.bat"
+        Start-Process "C:\Versions\3D_Mgmt_Update\Prep.bat"
     }
     else {
         rd -r C:\Versions -Force

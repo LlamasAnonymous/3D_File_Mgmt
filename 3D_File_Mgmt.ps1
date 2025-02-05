@@ -5,7 +5,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 # $ErrorActionPreference = 'Stop'
 cd $PSScriptRoot
 
-. ".\Update\Version_Check.ps1"
+Copy-Item "C:\3D_File_Mgmt\Misc\3D File Mgmt.lnk" "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs"
 
 $MaterialsL = "$home\3D_Mgmt\Configs\Materials.ini"
 $ModelingSoftwareL = "$home\3D_Mgmt\Configs\ModelingSoftwareLocation.ini"
@@ -26,11 +26,14 @@ $TP = @(
 
 if ((Test-Path $TP) -contains $false) {
     if ((Test-Path "$home\3D_Mgmt\Configs") -eq $false) {
-        mkdir "$home\3D_Mgmt\Configs" | Out-Null
+        mkdir "$home\3D_Mgmt\Configs"
     }
 
     New-Item $TP
+    Copy-Item "C:\3D_File_Mgmt\Update\Update_3D_FM.exe" "$home\3D_Mgmt"
 }
+
+. ".\Update\Version_Check.ps1"
 
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
