@@ -3,6 +3,7 @@ $ModelingSoftwareE = Get-Content $ModelingSoftwareL
 $MCE = Get-Content $MCL
 $SWE = Get-Content $SWL
 $zipE = Get-Content $zipL
+$Version_Local = Get-Content ".\Update\Version.ini"
 
 $PrintersE = Get-Content $PrintersL -ErrorAction SilentlyContinue
 
@@ -22,7 +23,7 @@ $MC_Label = New-Object System.Windows.Forms.Label -Property @{
 
     Location = New-Object System.Drawing.Point(10, 10)
     AutoSize = $true
-    Text = "Where would you like to save the file if you modeled it?"
+    Text = "Location of your model"
     Font = New-Object System.Drawing.Font("*",15)
     TextAlign = "MiddleLeft"
 }
@@ -32,7 +33,7 @@ $Settings_Form.Controls.Add($MC_Label)
 
 $MC_TextBox = New-Object System.Windows.Forms.TextBox -Property @{
 
-    Location = New-Object System.Drawing.Point(10, [Math]::Round($MC_Label.Height + $MC_Label.Top + 20))
+    Location = New-Object System.Drawing.Point(10, [Math]::Round($MC_Label.Height + $MC_Label.Top + 5))
     Width = 500
     Font = New-Object System.Drawing.Font("*",15)
     Text = $MCE
@@ -43,7 +44,7 @@ $Settings_Form.Controls.Add($MC_TextBox)
 
 $MC_Button = New-Object System.Windows.Forms.Button -Property @{
     
-    Location = New-Object System.Drawing.Point([Math]::Round($MC_TextBox.Width + $MC_TextBox.Left), [Math]::Round($MC_Label.Height + $MC_Label.Top + 15))
+    Location = New-Object System.Drawing.Point([Math]::Round($MC_TextBox.Width + $MC_TextBox.Left), [Math]::Round($MC_TextBox.Top - 5))
     AutoSize = $true
     Text = "Browse"
     Font = New-Object System.Drawing.Font("*",15)
@@ -55,9 +56,9 @@ $Settings_Form.Controls.Add($MC_Button)
 
 $SW_Label = New-Object System.Windows.Forms.Label -Property @{
 
-    Location = New-Object System.Drawing.Point(10, [Math]::Round($MC_Button.Height + $MC_Button.Top + 30))
+    Location = New-Object System.Drawing.Point(10, [Math]::Round($MC_Button.Height + $MC_Button.Top + 20))
     AutoSize = $true
-    Text = "Where would you like to save the file if you downloaded it?"
+    Text = "Location of your downloaded model"
     Font = New-Object System.Drawing.Font("*",15)
     TextAlign = "MiddleLeft"
 }
@@ -67,7 +68,7 @@ $Settings_Form.Controls.Add($SW_Label)
 
 $SW_TextBox = New-Object System.Windows.Forms.TextBox -Property @{
 
-    Location = New-Object System.Drawing.Point(10, [Math]::Round($SW_Label.Height + $SW_Label.Top + 20))
+    Location = New-Object System.Drawing.Point(10, [Math]::Round($SW_Label.Height + $SW_Label.Top + 5))
     Width = 500
     Font = New-Object System.Drawing.Font("*",15)
     Text = $SWE
@@ -78,7 +79,7 @@ $Settings_Form.Controls.Add($SW_TextBox)
 
 $SW_Button = New-Object System.Windows.Forms.Button -Property @{
     
-    Location = New-Object System.Drawing.Point([Math]::Round($SW_TextBox.Width + $SW_TextBox.Left), [Math]::Round($SW_Label.Height + $SW_Label.Top + 15))
+    Location = New-Object System.Drawing.Point([Math]::Round($SW_TextBox.Width + $SW_TextBox.Left), [Math]::Round($SW_TextBox.Top - 5))
     AutoSize = $true
     Text = "Browse"
     Font = New-Object System.Drawing.Font("*",15)
@@ -92,7 +93,7 @@ $Model_Check = New-Object System.Windows.Forms.CheckBox -Property @{
 
     Location = New-Object System.Drawing.Point(10, [Math]::Round($SW_Button.Height + $SW_Button.Top + 20))
     AutoSize = $true
-    Text = "Do you want to auto-open any 3D modeling sofware when creating a new file?"
+    Text = "Auto-open 3D modeling sofware"
     Font = New-Object System.Drawing.Font("*",13)
     Add_CheckedChanged = ({ Model_Check })
 }
@@ -112,7 +113,7 @@ $Model_Label = New-Object System.Windows.Forms.Label -Property @{
 
     Location = New-Object System.Drawing.Point(10, [Math]::Round($Model_Check.Height + $Model_Check.Top + 10))
     AutoSize = $true
-    Text = "Enter the location of the 3D modling sofware"
+    Text = "3D modeling sofware location"
     Font = New-Object System.Drawing.Font("*",15)
     TextAlign = "MiddleLeft"
 }
@@ -122,7 +123,7 @@ $Settings_Form.Controls.Add($Model_Label)
 
 $Model_TextBox = New-Object System.Windows.Forms.TextBox -Property @{
 
-    Location = New-Object System.Drawing.Point(10, [Math]::Round($Model_Label.Height + $Model_Label.Top + 20))
+    Location = New-Object System.Drawing.Point(10, [Math]::Round($Model_Label.Height + $Model_Label.Top + 5))
     Width = 500
     Font = New-Object System.Drawing.Font("*",15)
 }
@@ -149,7 +150,7 @@ $Settings_Form.Controls.Add($Model_TextBox)
 
 $Model_Button = New-Object System.Windows.Forms.Button -Property @{
     
-    Location = New-Object System.Drawing.Point([Math]::Round($Model_TextBox.Width + $Model_TextBox.Left), [Math]::Round($Model_Label.Height + $Model_Label.Top + 15))
+    Location = New-Object System.Drawing.Point([Math]::Round($Model_TextBox.Width + $Model_TextBox.Left), [Math]::Round($Model_TextBox.Top - 5))
     AutoSize = $true
     Text = "Browse"
     Font = New-Object System.Drawing.Font("*",15)
@@ -162,7 +163,7 @@ $ZIP_Check = New-Object System.Windows.Forms.CheckBox -Property @{
 
     Location = New-Object System.Drawing.Point(10, [Math]::Round($Model_Button.Height + $Model_Button.Top + 20))
     AutoSize = $true
-    Text = "Do you want to search through your files for a zipped folder after downloading it?"
+    Text = "Search for zipped folder"
     Font = New-Object System.Drawing.Font("*",13)
 }
 if ($zipE -eq "y") {
@@ -336,5 +337,16 @@ $Save_Button = New-Object System.Windows.Forms.Button -Property @{
     Add_Click = ({ Save })
 }
 $Settings_Form.Controls.Add($Save_button)
+
+
+
+$Version_Label = New-Object System.Windows.Forms.Label -Property @{
+
+    Location = New-Object System.Drawing.Point(10, [Math]::Round($Cancel_Button.Top - 20))
+    AutoSize = $true
+    Width = [Math]::Round($Cancel_Button.Width + $Save_Button.Width)
+    Text = $Version_Local
+}
+$Settings_Form.Controls.Add($Version_Label)
 
 # >> Form and properties <<
