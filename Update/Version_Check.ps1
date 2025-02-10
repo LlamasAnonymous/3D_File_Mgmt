@@ -16,6 +16,6 @@ if ($LASTEXITCODE -eq 0) {
         Start-Process "C:\Versions\3D_Mgmt_Update\Prep.bat"
     }
     else {
-        rd -r C:\Versions -Force
+        rd C:\Versions -r -Force
     }
 }

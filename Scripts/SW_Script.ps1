@@ -45,7 +45,7 @@ else {
     
             Expand-Archive $Zip_File_Search.FileName "$SWE\$NameText\Unzipped"
         }
-    }    
+    }
 }
 
 Start-Process "$SWE\$NameText"

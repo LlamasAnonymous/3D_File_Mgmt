@@ -351,7 +351,7 @@ $Version_Label = New-Object System.Windows.Forms.Label -Property @{
     Location = New-Object System.Drawing.Point(10, [Math]::Round($Cancel_Button.Top - 20))
     AutoSize = $true
     Width = [Math]::Round($Cancel_Button.Width + $Save_Button.Width)
-    Text = $Version_Local
+    Text = "$Version_Local"
 }
 $Settings_Form.Controls.Add($Version_Label)
 
