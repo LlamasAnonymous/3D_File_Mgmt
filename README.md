@@ -6,6 +6,8 @@
 
 # Good to know
 
+- Before starting the script, make sure that you execution policy is set correctly by entering the following command into a powershell admin window: Set-ExecutionPolicy Unrestricted -Force
+
 - For everything to work properly, you will need to clone the repo directly to your C drive
 
 - After downloading, the "3D File Mgmt" shortcut can be found in the "3D_File_Mgmt\Misc" folder
