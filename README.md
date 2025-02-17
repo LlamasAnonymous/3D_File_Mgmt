@@ -6,7 +6,7 @@
 
 - Help button with documentation on a PDF file
 
-# Get started *IMPORTANT*
+# Get started (IMPORTANT)
 
 - Before starting the script, make sure that you execution policy is set correctly by entering the following command into a powershell admin window: Set-ExecutionPolicy Unrestricted -Force
 
