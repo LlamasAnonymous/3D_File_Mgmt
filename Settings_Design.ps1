@@ -4,8 +4,7 @@ $MCE = Get-Content $MCL
 $SWE = Get-Content $SWL
 $zipE = Get-Content $zipL
 $Version_Local = Get-Content ".\Update\Version.ini"
-
-$PrintersE = Get-Content $PrintersL -ErrorAction SilentlyContinue
+$PrintersE = Get-Content $PrintersL
 
 . ".\Setting_Functions.ps1" # Imports form functions
 

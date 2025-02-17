@@ -231,11 +231,11 @@ function Save {
 
     if ($ZIP_Check.Checked) {
 
-        "y" | Out-File "$home\3D_Mgmt\Configs\zipconf.ini"
+        "y" | Out-File $zipL
     }
     else {
         
-        "n" | Out-File "$home\3D_Mgmt\Configs\zipconf.ini"
+        "n" | Out-File $zipL
     }
 
     

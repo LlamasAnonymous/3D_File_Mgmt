@@ -12,7 +12,7 @@ $ModelingSoftwareL = "$home\3D_Mgmt\Configs\ModelingSoftwareLocation.ini"
 $PrintersL = "$home\3D_Mgmt\Configs\Printers.ini"
 $MCL = "$home\3D_Mgmt\Configs\ScratchConfig.ini"
 $SWL = "$home\3D_Mgmt\Configs\SomewhereConfig.ini"
-$zipL = "$home\3D_Mgmt\Configs\zipconf.ini"
+$zipL = "$home\3D_Mgmt\Configs\zipconfig.ini"
 
 $TP = @(
 
@@ -30,10 +30,7 @@ if ((Test-Path $TP) -contains $false) {
     }
 
     New-Item $TP
-    Copy-Item "C:\3D_File_Mgmt\Update\Update_3D_FM.exe" "$home\3D_Mgmt"
 }
-
-. ".\Update\Version_Check.ps1"
 
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
