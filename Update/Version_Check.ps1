@@ -73,7 +73,7 @@ if ($LASTEXITCODE -eq 0) {
         }
     }
 
-    $env:Path += "C:\Program Files\Git\bin;C:\Program Files\PowerShell\7;"
+    $env:Path += ";C:\Program Files\Git\bin;C:\Program Files\PowerShell\7;"
 
     git clone https://github.com/LlamasAnonymous/Versions.git C:\Versions
 
