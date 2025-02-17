@@ -1,7 +1,6 @@
 $TP_Check = @()
 
 $Materials_Item = Get-Item $MaterialsL
-$ModelingSoftware_Item = Get-Item $ModelingSoftwareL
 $Printers_Item = Get-Item $PrintersL
 $MC_Item = Get-Item $MCL
 $SW_Item = Get-Item $SWL
@@ -15,7 +14,6 @@ $File_Length = @(
     $MC_Item
     $SW_Item
     $Materials_Item
-    $ModelingSoftware_Item
     $Printers_Item
 )
 
@@ -47,7 +45,7 @@ else {
 }
 
 
-if ($ModelingSoftwareE[1] -eq 'n') {
+if ($ModelingSoftwareE[1] -ne 'y') {
     
     $TP_Check += $true
 }
@@ -55,9 +53,3 @@ elseif ($ModelingSoftwareE[1] -eq 'y' -and (Test-Path $ModelingSoftwareE[0])) {
 
     $TP_Check += $true
 }
-else {
-
-    $TP_Check += $false
-}
-
-$TP_Check

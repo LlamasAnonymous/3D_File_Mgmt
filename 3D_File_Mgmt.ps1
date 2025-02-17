@@ -32,10 +32,14 @@ if ((Test-Path $TP) -contains $false) {
     New-Item $TP
 }
 
+if (Test-Path "$PSScriptRoot\Update\FirstTime.ini") {
+
+    Start-Process "$PSScriptRoot\Misc\Help\3D_File_Mgmt_Guide.pdf"
+    Remove-Item ".\Update\FirstTime.ini"
+}
+
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
-
-# >> Setup <<
 
 . ".\ConfigCheck.ps1"
 . ".\Settings_Design.ps1"
