@@ -6,11 +6,13 @@
 
 - Help button with documentation on a PDF file
 
-# Get started
+# Get started ( IMPORTANT )
 
 - Before starting the script, make sure that you execution policy is set correctly by entering the following command into a powershell admin window: Set-ExecutionPolicy Unrestricted -Force
 
-- For everything to work properly, you will need to clone/extract the repo directly to your C drive. It should look like this: "C:\3D_File_Mgmt\all of the script files"
+- If you download and extract the zipped folder, the script will not work. You have to clone it via Git, GitHub Desktop, etc.
+
+- For everything to work properly, you will need to clone the repo directly to your C drive. It should look like this: "C:\3D_File_Mgmt\all of the script files".
 
 - When launching the script for the first time, it will need to install the dependency applications (Git and Pwsh). It will check to make sure that they are installed every time you launch the script.
 
