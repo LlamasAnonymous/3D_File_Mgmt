@@ -6,6 +6,8 @@
 
 - Help button with documentation on a PDF file
 
+- Automatically opens the Help PDF file when you launch the script for the first time after install/update
+
 # Get started (IMPORTANT)
 
 - Before starting the script, make sure that you execution policy is set correctly by entering the following command into a powershell admin window: Set-ExecutionPolicy Unrestricted -Force
@@ -34,6 +36,8 @@
 
 - After bringing your downloaded folder to the new folder it will automatically sort most of the files for you
 
+- Hit enter on "Name" text box on main form to open the "New file" form
+
 # For help
 
 1. Start the script
@@ -41,5 +45,7 @@
 2. Click the "settings" button (if it didn't start you off there already)
 
 3. Click the "Help" button on the bottom right
+
+- If you have any further requests or need any further assistance you can create an issue on GitHub, and I'll get back to you ASAP.
 
 # Current know issues
