@@ -14,7 +14,7 @@ $NameL = New-Object System.Windows.Forms.Label -Property @{
 
     Location = New-Object System.Drawing.Point(0, 0)
     AutoSize = $true
-    Text = "What do you want to name your new file?"
+    Text = "What do you want to name your new model?"
     TextAlign = "MiddleCenter"
     Font = New-Object System.Drawing.Font("*", 15)
 }
@@ -47,7 +47,7 @@ $NewFileButton = New-Object System.Windows.Forms.Button -Property @{
     Location = New-Object System.Drawing.Point(0, [Math]::Round($Name.Height + $Name.top + 5))
     Height = 100
     Width = [Math]::Round($Name.Width / 2)
-    Text = "New File"
+    Text = "New Model"
     AutoSize = $true
     Font = New-Object System.Drawing.Font("*", 20)
     Add_Click = ({ NewFile_Click })
