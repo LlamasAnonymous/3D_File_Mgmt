@@ -5,8 +5,8 @@ $ErrorActionPreference = 'Continue'
 # $ErrorActionPreference = 'Stop'
 cd $PSScriptRoot
 
-mkdir "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Llama_Toolz\Toolz"
-Copy-Item "C:\Llama_Toolz\3D_File_Mgmt\Misc\3D File Mgmt.lnk" "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Llama_Toolz\Toolz"
+mkdir "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Llama_Toolz"
+Copy-Item "C:\Llama_Toolz\3D_File_Mgmt\Misc\3D File Mgmt.lnk" "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Llama_Toolz" -Force
 
 $MaterialsL = "$home\3D_Mgmt\Configs\Materials.ini"
 $ModelingSoftwareL = "$home\3D_Mgmt\Configs\ModelingSoftwareLocation.ini"
