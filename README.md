@@ -14,11 +14,11 @@
 
 - If you download and extract the zipped folder, the script will not work. You have to clone it via Git, GitHub Desktop, etc.
 
-- For everything to work properly, you will need to clone the repo directly to your C drive. It should look like this: "C:\3D_File_Mgmt\all of the script files".
+- For everything to work properly, you will need to clone the repo directly to your C drive. It should look like this: "C:\Llama_Toolz\3D_File_Mgmt\all of the script files".
 
 - When launching the script for the first time, it will need to install the dependency applications (Git and Pwsh). It will check to make sure that they are installed every time you launch the script.
 
-- After running for the first time, you can find the shorcut from the start menu. The shortcut from the start is located at: "C:\3D_File_Mgmt\Misc\3D File Mgmt.lnk"
+- After running for the first time, you can find the shorcut from the start menu. The shortcut from the start is located at: "C:\Llama_Toolz\3D_File_Mgmt\Misc\3D File Mgmt.lnk"
 
 # Good to know
 

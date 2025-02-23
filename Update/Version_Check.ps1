@@ -75,10 +75,10 @@ if ($LASTEXITCODE -eq 0) {
 
     $env:Path += ";C:\Program Files\Git\bin;C:\Program Files\PowerShell\7;"
 
-    git clone https://github.com/LlamasAnonymous/Versions.git C:\Versions
+    git clone https://github.com/LlamasAnonymous/Versions.git C:\Llama_Toolz\Versions
 
     $Local_Version = Get-Content ".\Update\Version.ini"
-    $Remote_Version = Get-Content "C:\Versions\3D_File_Mgmt.ini"
+    $Remote_Version = Get-Content "C:\Llama_Toolz\Versions\3D_File_Mgmt.ini"
 
     $Local_Version1 = $Local_Version.Replace('.', '')
     $Remote_Version1 = $Remote_Version.Replace('.', '')
@@ -87,15 +87,15 @@ if ($LASTEXITCODE -eq 0) {
 
     if ($VersionTotal -ne 0) {
 
-        Start-Process "C:\Versions\3D_Mgmt_Update\Rm3D.bat"
+        Start-Process "C:\Llama_Toolz\Versions\3D_Mgmt_Update\Rm3D.bat"
     }
     else {
         
-        rd C:\Versions -r -Force
-        pwsh -WindowStyle Hidden "C:\3D_File_Mgmt\3D_File_Mgmt.ps1"
+        rd C:\Llama_Toolz\Versions -r -Force
+        pwsh -WindowStyle Hidden "C:\Llama_Toolz\3D_File_Mgmt\3D_File_Mgmt.ps1"
     }
 }
 else {
 
-    pwsh -WindowStyle Hidden "C:\3D_File_Mgmt\3D_File_Mgmt.ps1"
+    pwsh -WindowStyle Hidden "C:\Llama_Toolz\3D_File_Mgmt\3D_File_Mgmt.ps1"
 }
