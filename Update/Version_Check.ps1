@@ -77,6 +77,9 @@ if ($LASTEXITCODE -eq 0) {
 
     git clone https://github.com/LlamasAnonymous/Versions.git C:\Llama_Toolz\Versions
 
+    Remove-Item "C:\3D_File_Mgmt" -r
+    Remove-Item "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\3D File Mgmt.lnk"
+
     $Local_Version = Get-Content ".\Update\Version.ini"
     $Remote_Version = Get-Content "C:\Llama_Toolz\Versions\3D_File_Mgmt.ini"
 
