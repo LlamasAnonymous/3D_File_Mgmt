@@ -8,12 +8,12 @@ cd $PSScriptRoot
 mkdir "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Llama_Toolz"
 Copy-Item "C:\Llama_Toolz\3D_File_Mgmt\Misc\3D File Mgmt.lnk" "$home\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Llama_Toolz" -Force
 
-$MaterialsL = "$home\3D_Mgmt\Configs\Materials.ini"
-$ModelingSoftwareL = "$home\3D_Mgmt\Configs\ModelingSoftwareLocation.ini"
-$PrintersL = "$home\3D_Mgmt\Configs\Printers.ini"
-$MCL = "$home\3D_Mgmt\Configs\ScratchConfig.ini"
-$SWL = "$home\3D_Mgmt\Configs\SomewhereConfig.ini"
-$zipL = "$home\3D_Mgmt\Configs\zipconfig.ini"
+$MaterialsL = "$home\Llama_Toolz\3D_Mgmt\Configs\Materials.ini"
+$ModelingSoftwareL = "$home\Llama_Toolz\3D_Mgmt\Configs\ModelingSoftwareLocation.ini"
+$PrintersL = "$home\Llama_Toolz\3D_Mgmt\Configs\Printers.ini"
+$MCL = "$home\Llama_Toolz\3D_Mgmt\Configs\ScratchConfig.ini"
+$SWL = "$home\Llama_Toolz\3D_Mgmt\Configs\SomewhereConfig.ini"
+$zipL = "$home\Llama_Toolz\3D_Mgmt\Configs\zipconfig.ini"
 
 $TP = @(
 
@@ -26,8 +26,8 @@ $TP = @(
 )
 
 if ((Test-Path $TP) -contains $false) {
-    if ((Test-Path "$home\3D_Mgmt\Configs") -eq $false) {
-        mkdir "$home\3D_Mgmt\Configs"
+    if ((Test-Path "$home\Llama_Toolz\3D_Mgmt\Configs") -eq $false) {
+        mkdir "$home\Llama_Toolz\3D_Mgmt\Configs"
     }
 
     New-Item $TP
