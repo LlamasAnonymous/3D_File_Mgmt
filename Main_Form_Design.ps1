@@ -24,7 +24,7 @@ $MainForm.Controls.Add($NameL)
 $Name = New-Object System.Windows.Forms.TextBox -Property @{
 
     Location = New-Object System.Drawing.Point(0, [Math]::Round($NameL.Height + $NameL.Top + 10))
-    Width = 383
+    Width = [Math]::Round($NameL.Width)
     Font = New-Object System.Drawing.Font("*", 20)
 }
 $MainForm.Controls.Add($Name)
